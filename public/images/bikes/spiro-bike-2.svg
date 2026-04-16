@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1000" viewBox="0 0 1400 1000">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="1000" fill="url(#bg2)"/>
+  <rect x="52" y="52" width="1296" height="896" rx="34" fill="#0a101d" stroke="#334155" stroke-width="4"/>
+  <circle cx="440" cy="720" r="120" fill="#0b1220" stroke="#64748b" stroke-width="12"/>
+  <circle cx="985" cy="720" r="120" fill="#0b1220" stroke="#64748b" stroke-width="12"/>
+  <path d="M390 685 L590 560 L840 560 L980 675" fill="none" stroke="#8F98A3" stroke-width="24" stroke-linecap="round"/>
+  <path d="M590 560 L650 455 L790 455 L840 560" fill="none" stroke="#C5CCD5" stroke-width="16" stroke-linecap="round"/>
+  <rect x="650" y="488" width="150" height="60" rx="12" fill="#6B7280" opacity="0.3" stroke="#B5BDC8" stroke-width="4"/>
+  <text x="700" y="180" text-anchor="middle" fill="#f8fafc" font-size="58" font-family="Arial" font-weight="700">SPIRO RIDE PLATFORM</text>
+  <text x="700" y="245" text-anchor="middle" fill="#94a3b8" font-size="32" font-family="Arial">Commercial Urban Mobility</text>
+</svg>

@@ -1,0 +1,205 @@
+{
+  "template_version": "1.0",
+  "config": {
+    "canvas_px": 3000,
+    "subject_fill": 0.8,
+    "background_floor_rgb": 245,
+    "gradient_start_y": 0.78,
+    "shadow_opacity": 0.16,
+    "shadow_height_ratio": 0.22,
+    "shadow_blur_ratio": 0.018,
+    "rembg_model": "u2netp"
+  },
+  "total_images": 21,
+  "images": [
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/bikes/bike5.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/bikes/bike5.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.639,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": -0.00016666666666666666
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/bikes/bike6.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/bikes/bike6.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.6383333333333333,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": -0.00016666666666666666
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/bikes/bike7.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/bikes/bike7.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.6393333333333333,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/bikes/bike8.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/bikes/bike8.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.6383333333333333,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": -0.00016666666666666666
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/gadgets/Anti-Theft Disc Alarm Lock.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/gadgets/Anti-Theft Disc Alarm Lock.png",
+      "subject_fill_x": 0.7976666666666666,
+      "subject_fill_y": 0.8,
+      "longest_fill": 0.8,
+      "center_delta_x": -0.00016666666666666666,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/gadgets/Fleet GPS Guard.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/gadgets/Fleet GPS Guard.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.49133333333333334,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/gadgets/Night Vision Rider Cam.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/gadgets/Night Vision Rider Cam.png",
+      "subject_fill_x": 0.628,
+      "subject_fill_y": 0.8,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/gadgets/Rapid Ride USB-C Charger.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/gadgets/Rapid Ride USB-C Charger.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.6423333333333333,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": -0.00016666666666666666
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/gadgets/Smart Battery Monitor.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/gadgets/Smart Battery Monitor.png",
+      "subject_fill_x": 0.6776666666666666,
+      "subject_fill_y": 0.8,
+      "longest_fill": 0.8,
+      "center_delta_x": -0.00016666666666666666,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/gadgets/Smart Quad Phone Holde.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/gadgets/Smart Quad Phone Holde.png",
+      "subject_fill_x": 0.634,
+      "subject_fill_y": 0.8,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/gadgets/Urban Safety Helmet Pro.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/gadgets/Urban Safety Helmet Pro.png",
+      "subject_fill_x": 0.698,
+      "subject_fill_y": 0.8,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/gadgets/Wireless Handlebar Charger.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/gadgets/Wireless Handlebar Charger.png",
+      "subject_fill_x": 0.6746666666666666,
+      "subject_fill_y": 0.8,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/spares/Drive Chain (Complete Loop).png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/spares/Drive Chain (Complete Loop).png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.371,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": -0.00016666666666666666
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/spares/Front Left Turn Signal.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/spares/Front Left Turn Signal.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.382,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/spares/Front Right Turn Signal.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/spares/Front Right Turn Signal.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.37766666666666665,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": -0.00016666666666666666
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/spares/Front Small Sprocket.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/spares/Front Small Sprocket.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.6696666666666666,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": -0.00016666666666666666
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/spares/Left Handle Switch.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/spares/Left Handle Switch.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.5013333333333333,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/spares/Main Bracket Spring.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/spares/Main Bracket Spring.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.31333333333333335,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/spares/Rear Big Sprocket.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/spares/Rear Big Sprocket.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.484,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/spares/Rearview Mirror Pair (L & R).png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/spares/Rearview Mirror Pair (L & R).png",
+      "subject_fill_x": 0.5503333333333333,
+      "subject_fill_y": 0.8,
+      "longest_fill": 0.8,
+      "center_delta_x": -0.00016666666666666666,
+      "center_delta_y": 0.0
+    },
+    {
+      "source": "P:/SourceCode-PIVOT/spirospares/images/spares/Side Bracket Spring.png",
+      "output": "P:/SourceCode-PIVOT/spirospares/public/images/spares/Side Bracket Spring.png",
+      "subject_fill_x": 0.8,
+      "subject_fill_y": 0.31166666666666665,
+      "longest_fill": 0.8,
+      "center_delta_x": 0.0,
+      "center_delta_y": -0.00016666666666666666
+    }
+  ]
+}

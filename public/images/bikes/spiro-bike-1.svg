@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1000" viewBox="0 0 1400 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8F98A3" />
+      <stop offset="100%" stop-color="#9CA3AF" />
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="1000" fill="url(#bg)"/>
+  <rect x="64" y="64" width="1272" height="872" rx="34" fill="#0b1220" stroke="#334155" stroke-width="4"/>
+  <circle cx="430" cy="710" r="130" fill="#111827" stroke="#64748b" stroke-width="12"/>
+  <circle cx="990" cy="710" r="130" fill="#111827" stroke="#64748b" stroke-width="12"/>
+  <path d="M390 680 L560 560 L835 560 L970 665" fill="none" stroke="url(#line)" stroke-width="24" stroke-linecap="round"/>
+  <path d="M560 560 L655 430 L800 430 L835 560" fill="none" stroke="#93c5fd" stroke-width="16" stroke-linecap="round"/>
+  <rect x="640" y="470" width="170" height="70" rx="14" fill="#7D8896" opacity="0.25" stroke="#B5BDC8" stroke-width="4"/>
+  <text x="700" y="180" text-anchor="middle" fill="#e2e8f0" font-size="62" font-family="Arial" font-weight="700">SPIRO BIKE</text>
+  <text x="700" y="248" text-anchor="middle" fill="#94a3b8" font-size="34" font-family="Arial">Electric Delivery Series</text>
+</svg>
