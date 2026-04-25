@@ -139,7 +139,18 @@ const DEFAULT_BIKE_IMAGE = '/images/bikes/bike6.png'
 const DEFAULT_SPARE_IMAGE = '/images/spares/Drive%20Chain%20(Complete%20Loop).png'
 const DEFAULT_GADGET_IMAGE = '/images/gadgets/Urban%20Safety%20Helmet%20Pro.png'
 
-const bikeNames = ['COMMANDO', 'VEO', 'EKON400M2', 'EKON400M1', 'EKON450M2'] as const
+const bikeNames = [
+  'COMMANDO',
+  'VEO',
+  'EKON400M2',
+  'EKON400M1',
+  'EKON450M1',
+  'EKON450M1V1',
+  'EKON450M1V2',
+  'EKON450M2',
+  'EKON450M2V2',
+  'EKON450M3',
+] as const
 type BikeName = (typeof bikeNames)[number]
 
 const safeBikeName = (name: string): BikeName => {
@@ -208,6 +219,7 @@ const mapGadget = (gadget: Gadget): LegacyGadget => {
     id: gadget._id,
     name: gadget.name,
     price: gadget.price,
+    stock: gadget.stock,
     images:
       gadget.images?.map((image) => image.asset.url).filter(Boolean).length
         ? gadget.images.map((image) => image.asset.url).filter(Boolean)

@@ -18,6 +18,7 @@ import {navigationSchema} from './navigation'
 import {seoDefaultsSchema} from './seoDefaults'
 import {homePageSchema} from './homePage'
 import {restockRequestSchema} from './restockRequest'
+import {contactRequestSchema} from './contactRequest'
 
 export const schemaTypes = [
   bikeSchema,
@@ -35,6 +36,7 @@ export const schemaTypes = [
   faqSchema,
   guideSchema,
   restockRequestSchema,
+  contactRequestSchema,
   navigationSchema,
   seoDefaultsSchema,
   homePageSchema,

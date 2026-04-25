@@ -1,6 +1,16 @@
 export type Bike = {
   id: string;
-  name: "COMMANDO" | "VEO" | "EKON400M2" | "EKON400M1" | "EKON450M2";
+  name:
+    | "COMMANDO"
+    | "VEO"
+    | "EKON400M2"
+    | "EKON400M1"
+    | "EKON450M1"
+    | "EKON450M1V1"
+    | "EKON450M1V2"
+    | "EKON450M2"
+    | "EKON450M2V2"
+    | "EKON450M3";
   category: string;
   price: number;
   SKU: string;
@@ -22,7 +32,18 @@ export type SparePart = {
   part_code: string;
   price: number;
   category: SparePartCategory;
-  compatible_models: Bike["name"][];
+  compatible_models: (
+    | "COMMANDO"
+    | "VEO"
+    | "EKON400M2"
+    | "EKON400M1"
+    | "EKON450M1"
+    | "EKON450M1V1"
+    | "EKON450M1V2"
+    | "EKON450M2"
+    | "EKON450M2V2"
+    | "EKON450M3"
+  )[];
   function: string;
   replacement_cycle: string;
   stock: number;
@@ -35,6 +56,7 @@ export type Gadget = {
   id: string;
   name: string;
   price: number;
+  stock?: number;
   images: string[];
   features: string[];
   compatibility: string;
@@ -608,135 +630,82 @@ export const gadgets: Gadget[] = [
 
 export const serviceLocations: ServiceLocation[] = [
   {
-    id: "nairobi-industrial",
-    name: "Nairobi Industrial Hub",
-    city: "Nairobi",
-    area: "Industrial Area",
-    address: "Dunga Close, Near Car & General Roundabout, Industrial Area, Nairobi",
-    phone: "+254733959383",
-    whatsapp: "+254733959383",
-    services: ["Repair", "Battery check", "Controller diagnostics", "Brake replacement", "Battery swapping"],
-    hours: "Mon-Sat 8:00 AM - 6:00 PM",
-    map_link:
-      "https://www.google.com/maps?q=Dunga+Close+Industrial+Area+Nairobi&output=embed",
-    battery_swapping: true
-  },
-  {
-    id: "westlands-rapid",
-    name: "Westlands Rapid Point",
+    id: "bishan-plaza",
+    name: "Bishan Plaza",
     city: "Nairobi",
     area: "Westlands",
-    address: "Ring Road Parklands, Westlands, Nairobi",
+    address: "Westlands, Nairobi",
     phone: "+254733959383",
     whatsapp: "+254733959383",
-    services: ["Battery swapping", "Quick tune-up", "Electrical troubleshooting"],
-    hours: "Mon-Sun 7:00 AM - 8:00 PM",
-    map_link: "https://www.google.com/maps?q=Westlands+Nairobi&output=embed",
+    services: ["Battery swapping", "Quick tune-up", "Spares pickup"],
+    hours: "24 Hours (12:00 AM - 12:00 AM)",
+    map_link: "https://www.google.com/maps?q=Bishan+Plaza+Westlands+Nairobi&output=embed",
     battery_swapping: true
   },
   {
-    id: "mombasa-hub",
-    name: "Mombasa EV Hub",
-    city: "Mombasa",
-    area: "Makadara",
-    address: "Makadara Road, Mombasa",
+    id: "roasters",
+    name: "Roasters",
+    city: "Nairobi",
+    area: "Thika Road",
+    address: "Roasters, Thika Road",
     phone: "+254733959383",
     whatsapp: "+254733959383",
-    services: ["Fleet maintenance", "Battery swapping", "Spares pickup"],
-    hours: "Mon-Sat 8:00 AM - 6:00 PM",
-    map_link: "https://www.google.com/maps?q=Makadara+Mombasa&output=embed",
+    services: ["Battery swapping", "Repair", "Electrical troubleshooting"],
+    hours: "24 Hours (12:00 AM - 12:00 AM)",
+    map_link: "https://www.google.com/maps?q=Roasters+Thika+Road+Nairobi&output=embed",
     battery_swapping: true
   },
   {
-    id: "kisumu-center",
-    name: "Kisumu Service Center",
-    city: "Kisumu",
-    area: "Milimani",
-    address: "Oginga Odinga Street, Milimani, Kisumu",
-    phone: "+254733959383",
-    whatsapp: "+254733959383",
-    services: ["Repair", "Battery check", "Brake and suspension"],
-    hours: "Mon-Sat 8:30 AM - 6:00 PM",
-    map_link: "https://www.google.com/maps?q=Milimani+Kisumu&output=embed",
-    battery_swapping: false
-  },
-  {
-    id: "nakuru-swap",
-    name: "Nakuru Swap Station",
-    city: "Nakuru",
-    area: "CBD",
-    address: "Kenyatta Avenue, Nakuru CBD",
+    id: "umoja-phase1",
+    name: "Umoja (Phase 1)",
+    city: "Nairobi",
+    area: "Umoja Phase 1",
+    address: "Umoja Phase 1, Nairobi",
     phone: "+254733959383",
     whatsapp: "+254733959383",
     services: ["Battery swapping", "Quick diagnostics", "General servicing"],
-    hours: "Mon-Sun 7:30 AM - 8:30 PM",
-    map_link: "https://www.google.com/maps?q=Nakuru+CBD&output=embed",
+    hours: "06:00 AM - 10:00 PM",
+    map_link: "https://www.google.com/maps?q=Umoja+Phase+1+Nairobi&output=embed",
     battery_swapping: true
   },
   {
-    id: "eldoret-workshop",
-    name: "Eldoret Workshop",
-    city: "Eldoret",
-    area: "Pioneer",
-    address: "Uganda Road, Pioneer, Eldoret",
+    id: "kayole",
+    name: "Kayole",
+    city: "Nairobi",
+    area: "Kayole Spine Road",
+    address: "Kayole Spine Road, Nairobi",
     phone: "+254733959383",
     whatsapp: "+254733959383",
-    services: ["Motor diagnostics", "Suspension", "Electrical"],
-    hours: "Mon-Sat 8:00 AM - 5:30 PM",
-    map_link: "https://www.google.com/maps?q=Uganda+Road+Eldoret&output=embed",
-    battery_swapping: false
-  },
-  {
-    id: "thika-fastfix",
-    name: "Thika FastFix Point",
-    city: "Thika",
-    area: "Kisii Road",
-    address: "Kisii Road Junction, Thika",
-    phone: "+254733959383",
-    whatsapp: "+254733959383",
-    services: ["Battery swapping", "Repair", "Controller reset"],
-    hours: "Mon-Sun 8:00 AM - 8:00 PM",
-    map_link: "https://www.google.com/maps?q=Thika+Town&output=embed",
+    services: ["Battery swapping", "Repair", "Spare fitment"],
+    hours: "06:00 AM - 10:00 PM",
+    map_link: "https://www.google.com/maps?q=Kayole+Spine+Road+Nairobi&output=embed",
     battery_swapping: true
   },
   {
-    id: "machakos-riders",
-    name: "Machakos Riders Bay",
-    city: "Machakos",
-    area: "Town Center",
-    address: "Machakos Town Center, Machakos",
+    id: "industrial-area",
+    name: "Industrial Area",
+    city: "Nairobi",
+    area: "Industrial Area",
+    address: "Dunga Close, Nairobi",
     phone: "+254733959383",
     whatsapp: "+254733959383",
-    services: ["General maintenance", "Battery check", "Spare fitment"],
-    hours: "Mon-Sat 9:00 AM - 6:00 PM",
-    map_link: "https://www.google.com/maps?q=Machakos+Town&output=embed",
-    battery_swapping: false
-  },
-  {
-    id: "nyeri-mobility",
-    name: "Nyeri Mobility Service",
-    city: "Nyeri",
-    area: "Kimathi Way",
-    address: "Kimathi Way, Nyeri",
-    phone: "+254733959383",
-    whatsapp: "+254733959383",
-    services: ["Battery swapping", "Brake tuning", "Electrical diagnostics"],
-    hours: "Mon-Sat 8:00 AM - 6:00 PM",
-    map_link: "https://www.google.com/maps?q=Nyeri+Town&output=embed",
+    services: ["Repair", "Battery check", "Controller diagnostics", "Brake replacement", "Battery swapping"],
+    hours: "06:00 AM - 10:00 PM",
+    map_link: "https://www.google.com/maps?q=Dunga+Close+Industrial+Area+Nairobi&output=embed",
     battery_swapping: true
   },
   {
-    id: "kakamega-core",
-    name: "Kakamega Core Service",
-    city: "Kakamega",
-    area: "CBD",
-    address: "Kenyatta Street, Kakamega",
+    id: "stanmerpark",
+    name: "Stanmerpark",
+    city: "Nairobi",
+    area: "Joseph Kangethe Road",
+    address: "Joseph Kangethe Road, Nairobi",
     phone: "+254733959383",
     whatsapp: "+254733959383",
-    services: ["Repair", "Battery check", "Spare pickup"],
-    hours: "Mon-Sat 8:30 AM - 5:30 PM",
-    map_link: "https://www.google.com/maps?q=Kakamega+Town&output=embed",
-    battery_swapping: false
+    services: ["Battery swapping", "Quick tune-up", "General maintenance"],
+    hours: "06:00 AM - 10:00 PM",
+    map_link: "https://www.google.com/maps?q=Joseph+Kangethe+Road+Nairobi&output=embed",
+    battery_swapping: true
   }
 ];
 
@@ -745,8 +714,7 @@ export const quickLinks = [
   { label: "Bikes", href: "/bikes" },
   { label: "Spares", href: "/spares" },
   { label: "Gadgets", href: "/gadgets" },
-  { label: "Service Center", href: "/services" },
-  { label: "Tracking", href: "/tracking" },
+  { label: "Pickup Points", href: "/services" },
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" }
 ];

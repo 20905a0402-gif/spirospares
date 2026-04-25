@@ -1,0 +1,9 @@
+name = "spirospares-restock-api"
+main = "src/index.ts"
+compatibility_date = "2026-04-17"
+
+[vars]
+SANITY_API_VERSION = "2026-04-15"
+MPESA_TRANSACTION_TYPE = "CustomerPayBillOnline"
+PAYMENT_IDEMPOTENCY_TTL_HOURS = "24"
+RESERVATION_WINDOW_MINUTES = "15"

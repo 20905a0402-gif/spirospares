@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import HeroBanner from "@/components/HeroBanner";
 import { formatKES } from "@/lib/data";
+import { bikesPageModelTargets, findBikeByTokens } from "@/lib/modelTargets";
 import { getLegacyBikes } from "@/lib/sanity/queries-data";
 
 export const metadata: Metadata = {
@@ -14,74 +15,83 @@ export const metadata: Metadata = {
 export default async function BikesPage() {
   const bikes = await getLegacyBikes();
 
-  const preferredTopModels = ["EKON400M2", "EKON400M1"] as const;
-  const selectedTopModels = preferredTopModels
-    .map((modelName) => bikes.find((bike) => bike.name === modelName))
-    .filter((bike): bike is (typeof bikes)[number] => Boolean(bike));
+  const defaultBike = bikes[0];
 
-  const topModels = selectedTopModels.length >= 2
-    ? selectedTopModels.slice(0, 2)
-    : [
-        ...selectedTopModels,
-        ...bikes.filter((bike) => !selectedTopModels.some((selectedBike) => selectedBike.id === bike.id))
-      ].slice(0, 2);
+  const displayModels = bikesPageModelTargets
+    .map((target) => {
+      const matchedBike = findBikeByTokens(bikes, target.searchTokens, target.fallbackTokens) ?? defaultBike;
+      if (!matchedBike) {
+        return null;
+      }
+
+      return {
+        bike: matchedBike,
+        displayName: target.label
+      };
+    })
+    .filter((model): model is { bike: (typeof bikes)[number]; displayName: string } => Boolean(model));
 
   return (
     <>
       <HeroBanner
         title="Premium Bikes for Kenya"
-        subtitle="Compare fleet-ready electric bikes designed for delivery scale, rider comfort, and rapid battery swapping integration."
+        subtitle="Compare fleet-ready electric bikes designed for delivery scale, rider comfort, and rapid battery swapping."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Bikes" }]}
       />
 
       <section className="container-shell py-10">
-        <div className="grid gap-5">
-          {topModels.map((bike, index) => (
-            <article key={bike.id} className="panel overflow-hidden">
-              <div className="grid lg:grid-cols-2">
-                <div className="relative min-h-[300px] bg-[#1A1A1A] md:min-h-[420px]">
+        <div className="grid gap-5 sm:grid-cols-2">
+          {displayModels.map((model, index) => (
+            <article key={`${model.displayName}-${model.bike.id}`} className="panel group relative flex h-full flex-col overflow-hidden">
+              <Link
+                href={`/bikes/${model.bike.id}`}
+                aria-label={`View ${model.displayName}`}
+                className="absolute inset-0 z-10"
+              />
+              <div className="pointer-events-none relative aspect-[4/3] bg-[#1A1A1A]">
                   <Image
-                    src={bike.images[0]}
-                    alt={`${bike.name} bike spotlight image`}
+                    src={model.bike.images[0]}
+                    alt={`${model.displayName} bike spotlight image`}
                     fill
                     priority={index === 0}
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition duration-500 ease-out group-hover:scale-105"
                   />
                 </div>
-                <div className="p-6 md:p-8">
+                <div className="pointer-events-none relative z-20 flex flex-1 flex-col p-6 md:p-8">
                   <p className="text-xs uppercase tracking-[0.2em] text-[#00BFFF]">Top Model</p>
-                  <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-white md:text-4xl">{bike.name}</h1>
-                  <p className="mt-3 text-gray-400">{bike.short_description}</p>
+                  <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-white md:text-4xl">{model.displayName}</h1>
+                  <p className="mt-3 text-gray-400">{model.bike.short_description}</p>
 
                   <div className="mt-5 flex items-baseline gap-3">
-                    <p className="text-3xl font-bold text-white">{formatKES(bike.price)}</p>
-                    <p className="text-sm uppercase tracking-wide text-gray-500">{bike.SKU}</p>
+                    <p className="text-3xl font-bold text-white">{formatKES(model.bike.price)}</p>
+                    <p className="text-sm uppercase tracking-wide text-gray-500">{model.bike.SKU}</p>
                   </div>
 
                   <div className="mt-5 grid gap-2 text-sm text-gray-300 sm:grid-cols-2">
-                    <p>Motor: {bike.motor}</p>
-                    <p>Range: {bike.range}</p>
-                    <p>Battery: {bike.battery}</p>
-                    <p>Top Speed: {bike.speed}</p>
+                    <p>Motor: {model.bike.motor}</p>
+                    <p>Range: {model.bike.range}</p>
+                    <p>Battery: {model.bike.battery}</p>
+                    <p>Top Speed: {model.bike.speed}</p>
                   </div>
 
-                  <div className="mt-7 flex flex-wrap gap-3">
+                  <div className="pointer-events-auto mt-10 border-t border-white/10 pt-6 sm:mt-auto">
+                    <div className="flex flex-wrap gap-3">
                     <Link
-                      href={`/bikes/${bike.id}`}
+                      href={`/bikes/${model.bike.id}`}
                       className="rounded-xl bg-[#00BFFF] px-5 py-3 text-sm font-bold text-white transition-all duration-300 ease-out hover:brightness-110"
                     >
-                      View Details
+                      View
                     </Link>
                     <Link
-                      href={`/spares?model=${encodeURIComponent(bike.name)}`}
+                      href={`/spares?model=${encodeURIComponent(model.displayName)}`}
                       className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-bold text-white transition-all duration-300 ease-out hover:border-[#00BFFF]/60 hover:text-[#00BFFF]"
                     >
                       View Compatible Spares
                     </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
             </article>
           ))}
         </div>

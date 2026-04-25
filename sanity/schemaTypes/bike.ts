@@ -9,6 +9,18 @@ export const bikeSchema = defineType({
       name: 'name',
       title: 'Bike Name',
       type: 'string',
+      options: {
+        list: [
+          {title: 'EKON450M1V1', value: 'EKON450M1V1'},
+          {title: 'EKON450M1V2', value: 'EKON450M1V2'},
+          {title: 'VEO', value: 'VEO'},
+          {title: 'EKON400M1', value: 'EKON400M1'},
+          {title: 'EKON450M1', value: 'EKON450M1'},
+          {title: 'EKON450M2', value: 'EKON450M2'},
+          {title: 'EKON400M2', value: 'EKON400M2'},
+          {title: 'COMMANDO', value: 'COMMANDO'},
+        ],
+      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({

@@ -1,0 +1,21 @@
+name,partCode,price,category,function,replacementCycle,material,quality,stock
+Front Fender,FD-EKON450M1V1-001,3500,Body & Trim,Protects from mud and water,As needed,High-impact plastic,OEM,10
+Rear Fender,RD-EKON450M1V1-001,3500,Body & Trim,Protects rear from splashes,As needed,High-impact plastic,OEM,10
+Side Panel Left,SPL-EKON450M1V1-001,4200,Body & Trim,Covers battery and internals,Inspect annually,ABS Plastic,OEM,5
+Side Panel Right,SPR-EKON450M1V1-001,4200,Body & Trim,Covers battery and internals,Inspect annually,ABS Plastic,OEM,5
+Front Fork Assembly,FFK-EKON450M1V1-001,15000,Frame & Suspension,Front suspension system,Check every 10000km,Steel alloy with hydraulic,OEM,3
+Rear Shock Absorber,RSA-EKON450M1V1-001,8500,Frame & Suspension,Rear suspension damping,Replace every 20000km,Steel spring and hydraulic,OEM,4
+Handlebar Grip Left,HGL-EKON450M1V1-001,800,General,Rider grip comfort,Replace when worn,Rubber compound,Aftermarket,20
+Handlebar Grip Right,HGR-EKON450M1V1-001,800,General,Rider grip comfort,Replace when worn,Rubber compound,Aftermarket,20
+Brake Lever Left,BLL-EKON450M1V1-001,2200,General,Rear brake control,Inspect every 5000km,Aluminum alloy,OEM,8
+Brake Lever Right,BLR-EKON450M1V1-001,2200,General,Front brake control,Inspect every 5000km,Aluminum alloy,OEM,8
+Headlight Assembly,HLA-EKON450M1V1-001,12000,Electrical,Front illumination,Check annually,LED module with housing,OEM,3
+Taillight Assembly,TLA-EKON450M1V1-001,6500,Electrical,Rear visibility light,Check annually,LED module with housing,OEM,5
+Turn Signal Front Left,TFL-EKON450M1V1-001,1800,Electrical,Front left indicator,Check annually,LED with amber lens,OEM,6
+Turn Signal Front Right,TFR-EKON450M1V1-001,1800,Electrical,Front right indicator,Check annually,LED with amber lens,OEM,6
+Turn Signal Rear Left,TRL-EKON450M1V1-001,1800,Electrical,Rear left indicator,Check annually,LED with amber lens,OEM,6
+Turn Signal Rear Right,TRR-EKON450M1V1-001,1800,Electrical,Rear right indicator,Check annually,LED with amber lens,OEM,6
+Battery Cover,BC-EKON450M1V1-001,5500,Frame & Suspension,Protects battery compartment,Inspect annually,Reinforced plastic,OEM,4
+Footrest Left,FRL-EKON450M1V1-001,1500,General,Passenger foot support,Check every 5000km,Steel with rubber pad,OEM,10
+Footrest Right,FRR-EKON450M1V1-001,1500,General,Passenger foot support,Check every 5000km,Steel with rubber pad,OEM,10
+Center Stand,CS-EKON450M1V1-001,4500,Frame & Suspension,Parking stability support,Check every 5000km,Steel tubing,OEM,5

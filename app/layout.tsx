@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import SiteShell from "@/components/SiteShell";
+import { getSiteUrl } from "@/lib/siteUrl";
 
 const headingFont = Space_Grotesk({
   subsets: ["latin"],
@@ -18,7 +19,7 @@ const bodyFont = Inter({
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tamtechev.co.ke"),
+  metadataBase: new URL(getSiteUrl()),
   title: {
     default: "SPIRO SPARES",
     template: "%s | SPIRO SPARES Kenya"

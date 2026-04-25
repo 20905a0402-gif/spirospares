@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AlertTriangle, Heart, ShoppingCart } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { KeyboardEvent, MouseEvent, useState } from "react";
+import { AlertTriangle, Heart } from "lucide-react";
 import { SparePart, formatKES } from "@/lib/data";
 import { useShopStore } from "@/lib/store";
 import RestockRequestButton from "@/components/stock/RestockRequestButton";
 import { applyStockPointDiscount, STOCK_POINT_DISCOUNT_RATE } from "@/lib/stockPoint";
+import AddToCartButton from "@/components/AddToCartButton";
 
 type SpareCardProps = {
   part: SparePart;
@@ -14,15 +17,50 @@ type SpareCardProps = {
 };
 
 export default function SpareCard({ part, compact = false }: SpareCardProps) {
+  const router = useRouter();
   const addToCart = useShopStore((state) => state.addToCart);
   const toggleWishlist = useShopStore((state) => state.toggleWishlist);
   const isWishlisted = useShopStore((state) => state.isWishlisted(part.id, "spare"));
+  const isInCart = useShopStore((state) => state.cart.some((item) => item.id === part.id && item.type === "spare"));
   const isStockPointAuthenticated = useShopStore((state) => state.isStockPointAuthenticated);
   const discountedPrice = applyStockPointDiscount(part.price);
+  const detailHref = `/spares/${part.id}`;
+  const [quantity, setQuantity] = useState(1);
+  const cartItem = useShopStore((state) => state.cart.find((item) => item.id === part.id && item.type === "spare"));
+  const effectiveQuantity = cartItem?.quantity ?? quantity;
+
+  const handleCardClick = (event: MouseEvent<HTMLElement>) => {
+    const target = event.target as HTMLElement;
+    if (target.closest("button, a, input, select, textarea, label")) {
+      return;
+    }
+
+    router.push(detailHref);
+  };
+
+  const handleCardKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key !== "Enter" && event.key !== " ") {
+      return;
+    }
+
+    const target = event.target as HTMLElement;
+    if (target.closest("button, a, input, select, textarea, label")) {
+      return;
+    }
+
+    event.preventDefault();
+    router.push(detailHref);
+  };
 
   return (
-    <article className="panel group flex h-full flex-col overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#00BFFF]/50 hover:shadow-[inset_0_0_26px_rgba(0, 191, 255,0.1)]">
-      <Link href={`/spares/${part.id}`} className={`relative block overflow-hidden bg-[#1A1A1A] ${compact ? "aspect-square" : "aspect-[4/3]"}`}>
+    <article
+      role="link"
+      tabIndex={0}
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
+      className="panel group flex h-full cursor-pointer flex-col overflow-hidden transition-all duration-300 ease-out hover:border-[#00BFFF]/50 hover:shadow-[inset_0_0_26px_rgba(0, 191, 255,0.1)]"
+    >
+      <div className={`relative block overflow-hidden bg-[#1A1A1A] ${compact ? "aspect-square" : "aspect-[4/3]"}`}>
         <Image
           src={part.image}
           alt={`Spiro EV spare part ${part.name} in Nairobi with battery swapping network compatibility`}
@@ -36,7 +74,7 @@ export default function SpareCard({ part, compact = false }: SpareCardProps) {
             Out of stock
           </span>
         ) : null}
-      </Link>
+      </div>
       <div className={`flex flex-1 flex-col gap-2 ${compact ? "p-3" : "p-4"}`}>
         <h3 className={`${compact ? "text-sm" : "text-lg"} font-bold tracking-tight text-white`} style={{ fontFamily: "var(--font-heading)" }}>
           {part.name}
@@ -64,18 +102,26 @@ export default function SpareCard({ part, compact = false }: SpareCardProps) {
             )
           ) : null}
         </div>
-        <div className={`mt-auto grid gap-2 ${compact ? "grid-cols-[minmax(0,1fr)_36px_36px]" : "grid-cols-[minmax(0,1fr)_44px_44px]"}`}>
-          <Link
-            href={`/spares/${part.id}`}
-            className={`inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white text-slate-700 transition-all duration-300 ease-out hover:border-[#00BFFF]/60 hover:text-[#00BFFF] ${compact ? "min-h-[36px] px-2 text-xs font-semibold" : "min-h-[44px] px-3 text-sm font-bold"}`}
-          >
-            View Details
-          </Link>
-          {part.stock > 0 ? (
+        <div className="mt-auto space-y-2">
+          <div className={`grid gap-2 ${compact ? "grid-cols-[1fr_36px]" : "grid-cols-[1fr_44px]"}`}>
+            {part.stock > 0 ? (
+              <AddToCartButton
+                item={{ id: part.id, type: "spare", name: part.name, price: part.price, image: part.image, sku: part.part_code }}
+                compact={compact}
+              />
+            ) : (
+              <RestockRequestButton
+                productId={part.id}
+                productName={part.name}
+                productType="spare"
+                sku={part.part_code}
+                compact={compact}
+              />
+            )}
             <button
               type="button"
               onClick={() =>
-                addToCart({
+                toggleWishlist({
                   id: part.id,
                   type: "spare",
                   name: part.name,
@@ -84,42 +130,16 @@ export default function SpareCard({ part, compact = false }: SpareCardProps) {
                   sku: part.part_code
                 })
               }
-              className={`inline-flex items-center justify-center rounded-xl bg-[#00BFFF] text-white transition-all duration-300 ease-out hover:brightness-110 hover:shadow-[0_0_15px_rgba(0, 191, 255,0.35)] ${compact ? "min-h-[36px]" : "min-h-[44px] text-sm font-bold"}`}
-              aria-label={`Add ${part.name} to cart`}
+              className={`inline-flex items-center justify-center rounded-xl border transition-all duration-300 ease-out ${compact ? "min-h-[36px] px-2" : "min-h-[44px] px-3 text-sm"} ${
+                isWishlisted
+                  ? "border-[#00BFFF]/60 bg-[#00BFFF]/15 text-[#00BFFF]"
+                  : "border-slate-300 bg-white text-slate-700 hover:border-[#00BFFF]/60 hover:text-[#00BFFF]"
+              }`}
+              aria-label={`Add ${part.name} to wishlist`}
             >
-              <ShoppingCart className={compact ? "h-3.5 w-3.5" : "h-4 w-4"} />
+              <Heart className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"} ${isWishlisted ? "fill-current" : ""}`} />
             </button>
-          ) : (
-            <RestockRequestButton
-              productId={part.id}
-              productName={part.name}
-              productType="spare"
-              sku={part.part_code}
-              compact={compact}
-              iconOnly
-            />
-          )}
-          <button
-            type="button"
-            onClick={() =>
-              toggleWishlist({
-                id: part.id,
-                type: "spare",
-                name: part.name,
-                price: part.price,
-                image: part.image,
-                sku: part.part_code
-              })
-            }
-            className={`inline-flex items-center justify-center rounded-xl border transition-all duration-300 ease-out ${compact ? "min-h-[36px] px-2" : "min-h-[44px] px-3 text-sm"} ${
-              isWishlisted
-                ? "border-[#00BFFF]/60 bg-[#00BFFF]/15 text-[#00BFFF]"
-                : "border-slate-300 bg-white text-slate-700 hover:border-[#00BFFF]/60 hover:text-[#00BFFF]"
-            }`}
-            aria-label={`Add ${part.name} to wishlist`}
-          >
-            <Heart className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"} ${isWishlisted ? "fill-current" : ""}`} />
-          </button>
+          </div>
         </div>
       </div>
     </article>

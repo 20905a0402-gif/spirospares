@@ -24,7 +24,7 @@ type ShopState = {
   isStockPointAuthenticated: boolean;
   authenticateStockPoint: (username: string, password: string) => boolean;
   logoutStockPoint: () => void;
-  addToCart: (item: ProductActionItem) => void;
+  addToCart: (item: ProductActionItem, quantity?: number) => void;
   removeFromCart: (id: string, type: ProductType) => void;
   updateCartQuantity: (id: string, type: ProductType, quantity: number) => void;
   toggleWishlist: (item: ProductActionItem) => void;
@@ -69,8 +69,11 @@ export const useShopStore = create<ShopState>((set, get) => ({
         price: item.basePrice
       }))
     })),
-  addToCart: (item) =>
+  addToCart: (item, quantity = 1) =>
     set((state) => {
+      const requestedQuantity = Number.isFinite(quantity)
+        ? Math.max(1, Math.floor(quantity))
+        : 1;
       const basePrice = item.basePrice ?? item.price;
       const effectivePrice = state.isStockPointAuthenticated
         ? applyStockPointDiscount(basePrice)
@@ -80,13 +83,15 @@ export const useShopStore = create<ShopState>((set, get) => ({
       if (existing) {
         return {
           cart: state.cart.map((cartItem) =>
-            isSameProduct(cartItem, item) ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+            isSameProduct(cartItem, item)
+              ? { ...cartItem, quantity: cartItem.quantity + requestedQuantity }
+              : cartItem
           )
         };
       }
 
       return {
-        cart: [...state.cart, { ...item, basePrice, price: effectivePrice, quantity: 1 }]
+        cart: [...state.cart, { ...item, basePrice, price: effectivePrice, quantity: requestedQuantity }]
       };
     }),
   removeFromCart: (id, type) =>

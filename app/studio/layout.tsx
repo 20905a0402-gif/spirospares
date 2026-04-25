@@ -1,7 +1,7 @@
 import type {ReactNode} from 'react'
 
 export const metadata = {
-  title: 'Sanity Studio',
+  title: 'Content Studio Access',
 }
 
 export default function StudioLayout({children}: {children: ReactNode}) {

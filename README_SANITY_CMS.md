@@ -2,14 +2,15 @@
 
 ## ✅ Build Status: SUCCESS
 
-Your comprehensive Sanity CMS integration is **complete and tested**. The build compiled successfully with all 53+ routes including the full admin panel at `/studio`.
+Your comprehensive Sanity CMS integration is **complete and tested**. The storefront remains static, while Sanity Studio is hosted outside this app and linked from `/studio`.
 
 ---
 
 ## 📊 What's Now Available
 
 ### ✨ Sanity Studio Admin Panel
-- **Access**: `http://localhost:3000/studio` (local dev) or your Cloudflare domain `/studio`
+- **Access**: `https://<your-sanity-studio-url>` (primary)
+- **Storefront handoff**: `/studio` page links to the hosted Studio URL
 - **Features**: Drag-and-drop content management, image optimization, publishing workflow
 - **Size**: 1.47 MB (optimized)
 - **Status**: Ready to use immediately
@@ -51,7 +52,7 @@ npm run dev
 ```
 
 ### Step 2: Access Admin Panel
-Open: **http://localhost:3000/studio**
+Open your hosted Studio URL.
 
 You should see the Sanity Studio dashboard with all content types ready.
 

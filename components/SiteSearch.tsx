@@ -58,7 +58,7 @@ export default function SiteSearch({ mobile = false }: SiteSearchProps) {
   };
 
   return (
-    <div ref={rootRef} className={`relative ${mobile ? "w-full" : "w-full max-w-[420px]"}`}>
+    <div ref={rootRef} className={`relative ${mobile ? "w-full" : "w-full"}`}>
       <form onSubmit={submitSearch} className="relative">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
         <input
@@ -66,8 +66,8 @@ export default function SiteSearch({ mobile = false }: SiteSearchProps) {
           value={query}
           onFocus={() => setIsFocused(true)}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search bikes, spares, gadgets, service centers..."
-          className={`w-full rounded-full border border-white/20 bg-white px-10 py-2.5 text-sm text-slate-700 placeholder:text-gray-500 transition-all duration-300 ease-out focus:border-[#00BFFF]/70 focus:outline-none ${
+          placeholder="Search bikes, spares, and gadgets..."
+          className={`w-full rounded-full border border-white/20 bg-white px-10 py-3.5 text-sm text-slate-700 placeholder:text-gray-500 transition-all duration-300 ease-out focus:border-[#00BFFF]/70 focus:outline-none ${
             mobile ? "shadow-sm" : "shadow-[0_4px_16px_rgba(15,23,42,0.06)]"
           }`}
         />

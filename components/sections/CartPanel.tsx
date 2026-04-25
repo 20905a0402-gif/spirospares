@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Minus, Plus, Trash2 } from "lucide-react";
@@ -12,6 +13,49 @@ export default function CartPanel() {
   const removeFromCart = useShopStore((state) => state.removeFromCart);
   const updateCartQuantity = useShopStore((state) => state.updateCartQuantity);
   const isStockPointAuthenticated = useShopStore((state) => state.isStockPointAuthenticated);
+  const [quantityDrafts, setQuantityDrafts] = useState<Record<string, string>>({});
+
+  const resolveDraftValue = (key: string, quantity: number) => {
+    if (Object.prototype.hasOwnProperty.call(quantityDrafts, key)) {
+      return quantityDrafts[key];
+    }
+
+    return String(quantity);
+  };
+
+  const commitQuantityDraft = (key: string, id: string, type: typeof cart[number]["type"], fallbackQuantity: number) => {
+    const draft = quantityDrafts[key];
+
+    if (draft === undefined) {
+      return;
+    }
+
+    const trimmed = draft.trim();
+
+    if (!trimmed) {
+      setQuantityDrafts((previous) => {
+        const { [key]: _ignored, ...rest } = previous;
+        return rest;
+      });
+      return;
+    }
+
+    const parsedQuantity = Number(trimmed);
+
+    if (!Number.isFinite(parsedQuantity) || parsedQuantity < 1) {
+      setQuantityDrafts((previous) => ({
+        ...previous,
+        [key]: String(fallbackQuantity)
+      }));
+      return;
+    }
+
+    updateCartQuantity(id, type, parsedQuantity);
+    setQuantityDrafts((previous) => {
+      const { [key]: _ignored, ...rest } = previous;
+      return rest;
+    });
+  };
 
   const total = cart.reduce((accumulator, item) => accumulator + item.price * item.quantity, 0);
   const baseTotal = cart.reduce((accumulator, item) => accumulator + (item.basePrice ?? item.price) * item.quantity, 0);
@@ -22,11 +66,17 @@ export default function CartPanel() {
 
   return (
     <div className="grid gap-4">
-      {cart.map((item) => (
-        <article key={`${item.type}-${item.id}`} className="panel flex flex-col gap-4 p-4 md:flex-row md:items-center">
-          <div className="relative h-24 w-24 overflow-hidden rounded-xl bg-[#1A1A1A]">
+      {cart.map((item) => {
+        const cartKey = `${item.type}-${item.id}`;
+
+        return (
+        <article key={cartKey} className="panel flex flex-col gap-4 p-4 md:flex-row md:items-center">
+          <Link
+            href={`/${item.type}s/${item.id}`}
+            className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-[#1A1A1A] transition hover:opacity-90"
+          >
             <Image src={item.image} alt={`${item.name} cart item`} fill sizes="96px" className="object-cover" />
-          </div>
+          </Link>
 
           <div className="flex-1">
             <h2 className="text-lg font-semibold text-white">{item.name}</h2>
@@ -45,7 +95,32 @@ export default function CartPanel() {
             >
               <Minus className="h-4 w-4" />
             </button>
-            <span className="w-8 text-center text-sm font-semibold">{item.quantity}</span>
+            <input
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={resolveDraftValue(cartKey, item.quantity)}
+              onChange={(event) => {
+                const nextDraft = event.target.value;
+                if (!/^\d*$/.test(nextDraft)) {
+                  return;
+                }
+
+                setQuantityDrafts((previous) => ({
+                  ...previous,
+                  [cartKey]: nextDraft
+                }));
+              }}
+              onBlur={() => commitQuantityDraft(cartKey, item.id, item.type, item.quantity)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  commitQuantityDraft(cartKey, item.id, item.type, item.quantity);
+                }
+              }}
+              className="w-14 rounded-lg border border-white/15 bg-white px-2 py-1 text-center text-sm font-semibold text-slate-700 focus:border-[#00BFFF]/70 focus:outline-none"
+              aria-label={`Quantity for ${item.name}`}
+            />
             <button
               type="button"
               onClick={() => updateCartQuantity(item.id, item.type, item.quantity + 1)}
@@ -63,7 +138,7 @@ export default function CartPanel() {
             <Trash2 className="h-4 w-4" /> Remove
           </button>
         </article>
-      ))}
+      )})}
 
       <div className="panel p-5 text-right">
         <p className="text-sm text-gray-500">Estimated Total</p>

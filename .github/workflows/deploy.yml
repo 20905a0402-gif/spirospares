@@ -2,9 +2,10 @@ name: Deploy to Cloudflare Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   pull_request:
-    branches: [main]
+    branches: [main, master]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -25,13 +26,19 @@ jobs:
       
       - name: Build Next.js
         run: npm run build
-      
-      - name: Run Cloudflare adapter
-        run: npx @cloudflare/next-on-pages --skip-build
-      
-      - name: Deploy to Cloudflare Pages
+
+      - name: Deploy production build
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy .vercel/output/static --project-name spirospares --branch production
+          command: pages deploy out --project-name spirospares --branch production
+
+      - name: Deploy PR preview build
+        if: github.event_name == 'pull_request'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy out --project-name spirospares --branch pr-${{ github.event.number }}

@@ -17,6 +17,8 @@ export async function generateStaticParams() {
   return parts.map((part) => ({ partId: part.id }));
 }
 
+export const dynamicParams = true;
+
 export async function generateMetadata({ params }: SpareDetailPageProps): Promise<Metadata> {
   const part = await getLegacySparePartById(params.partId);
 
@@ -52,7 +54,7 @@ export default async function SpareDetailPage({ params }: SpareDetailPageProps) 
       "@type": "Offer",
       priceCurrency: "KES",
       price: part.price,
-      availability: "https://schema.org/InStock"
+      availability: part.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
     }
   };
 
@@ -88,7 +90,7 @@ export default async function SpareDetailPage({ params }: SpareDetailPageProps) 
 
       <section className="container-shell pb-10">
         <h2 className="text-2xl font-bold tracking-tight text-white">Similar Spares</h2>
-        <div className="catalog-grid-compact mt-4">
+        <div className="similar-products-grid mt-4">
           {similarParts.map((similarPart) => (
             <SpareCard key={similarPart.id} part={similarPart} compact />
           ))}

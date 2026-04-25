@@ -1,7 +1,8 @@
 "use client";
 
 import {FormEvent, useState} from "react";
-import {BadgePercent, LogIn, LogOut, ShieldCheck} from "lucide-react";
+import { createPortal } from "react-dom";
+import {BadgePercent, CircleUserRound, LogOut, ShieldCheck} from "lucide-react";
 import {useShopStore} from "@/lib/store";
 
 type StockPointLoginProps = {
@@ -52,9 +53,9 @@ export default function StockPointLogin({compact = false}: StockPointLoginProps)
           </span>
         </button>
 
-        {open ? (
-          <div className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-900/55 p-4">
-            <div className="w-full max-w-sm rounded-2xl border border-white/20 bg-white p-5">
+        {open ? createPortal(
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/80 p-4" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
+            <div className="w-full max-w-sm rounded-2xl border border-white/20 bg-white p-6 shadow-2xl">
               <h3 className="text-lg font-bold text-slate-900">Member Access Active</h3>
               <p className="mt-1 text-xs text-slate-500">10% discount is currently enabled for this session.</p>
 
@@ -79,7 +80,8 @@ export default function StockPointLogin({compact = false}: StockPointLoginProps)
                 </button>
               </div>
             </div>
-          </div>
+          </div>,
+          document.body
         ) : null}
       </>
     );
@@ -93,16 +95,17 @@ export default function StockPointLogin({compact = false}: StockPointLoginProps)
           setOpen(true);
           setError(null);
         }}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-slate-700 transition-all duration-300 ease-out hover:border-[#00BFFF]/60 hover:text-[#00BFFF]"
+        className={`inline-flex items-center justify-center gap-1.5 rounded-full border border-white/20 bg-white/5 text-slate-700 transition-all duration-300 ease-out hover:border-[#00BFFF]/60 hover:text-[#00BFFF] ${compact ? "h-10 px-2.5" : "h-10 px-3"}`}
         aria-label="Open login"
         title="Open login"
       >
-        <LogIn className="h-4 w-4" />
+        <CircleUserRound className="h-4 w-4" />
+        <span className={`font-semibold ${compact ? "text-[11px]" : "text-xs"}`}>Login</span>
       </button>
 
-      {open ? (
-        <div className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-900/55 p-4">
-          <div className="w-full max-w-sm rounded-2xl border border-white/20 bg-white p-5">
+      {open ? createPortal(
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/80 p-4" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
+          <div className="w-full max-w-sm rounded-2xl border border-white/20 bg-white p-6 shadow-2xl">
             <h3 className="text-lg font-bold text-slate-900">Member Login</h3>
             <p className="mt-1 text-xs text-slate-500">Dummy credentials for demo access and 10% member discount.</p>
 
@@ -147,7 +150,8 @@ export default function StockPointLogin({compact = false}: StockPointLoginProps)
               Demo: username <strong>stockpoint</strong> and password <strong>stock@123</strong>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       ) : null}
     </>
   );

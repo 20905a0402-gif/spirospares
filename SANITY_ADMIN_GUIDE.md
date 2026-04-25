@@ -6,15 +6,17 @@ Your Spiro Spares website now has a **complete content management system** power
 
 ### Access Your Admin Panel
 
-**Local Development:**
+**Hosted Studio URL:**
 ```
-http://localhost:3000/studio
+https://<your-sanity-studio-url>
 ```
 
-**Production (After Deployment):**
+**Storefront handoff page (optional):**
 ```
 https://spirospares.pages.dev/studio
 ```
+
+The storefront route is only an access page and does not host Studio directly.
 
 ---
 
@@ -110,7 +112,7 @@ npm run dev
 ```
 
 ### 4. Access Sanity Studio
-Open: `http://localhost:3000/studio`
+Open your hosted Studio URL (configured in `NEXT_PUBLIC_SANITY_STUDIO_URL`).
 
 You should see the Sanity admin panel with all content management tools.
 
@@ -234,7 +236,7 @@ Sanity CMS (Admin Panel)
 
 ### Example: How a Bike Appears on Your Site
 
-1. **You add a bike in Sanity Studio** (`/studio`)
+1. **You add a bike in Sanity Studio** (hosted Studio URL)
    - Fill bike details
    - Upload images
    - Click Publish
@@ -298,7 +300,7 @@ npx wrangler pages deploy out --project-name spirospares
 
 ### Step 3: Access Live Admin Panel
 ```
-https://spirospares.pages.dev/studio
+https://<your-sanity-studio-url>
 ```
 
 ---
@@ -437,4 +439,4 @@ npm run build
 
 **Your complete Sanity CMS is ready to use! Start adding content now.** 🚀
 
-*Next: Visit `http://localhost:3000/studio` and start creating content!*
+*Next: Open your hosted Studio URL and start creating content!*

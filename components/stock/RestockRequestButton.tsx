@@ -13,6 +13,16 @@ type RestockRequestButtonProps = {
   iconOnly?: boolean;
 };
 
+function getRestockEndpoint() {
+  const base = process.env.NEXT_PUBLIC_RESTOCK_API_URL?.trim();
+
+  if (!base) {
+    return null;
+  }
+
+  return `${base.replace(/\/$/, "")}/restock-request`;
+}
+
 export default function RestockRequestButton({
   productId,
   productName,
@@ -47,7 +57,13 @@ export default function RestockRequestButton({
     setError(null);
 
     try {
-      const response = await fetch("/api/restock-request", {
+      const endpoint = getRestockEndpoint();
+
+      if (!endpoint) {
+        throw new Error("Restock API is not configured");
+      }
+
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
@@ -73,7 +89,7 @@ export default function RestockRequestButton({
       setOpen(false);
       window.alert("Request sent. We will notify you when this product is restocked.");
     } catch {
-      setError("Could not send request right now. Please try again.");
+      setError("Could not send request right now. Please try again or contact support.");
     } finally {
       setSubmitting(false);
     }

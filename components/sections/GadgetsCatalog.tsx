@@ -108,7 +108,7 @@ export default function GadgetsCatalog({ items }: GadgetsCatalogProps) {
             </label>
           </div>
 
-          <div className="catalog-grid-compact">
+          <div className="catalog-grid-uniform">
             {filteredItems.map((gadget) => (
               <GadgetCard key={gadget.id} gadget={gadget} compact />
             ))}

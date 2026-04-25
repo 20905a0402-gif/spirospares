@@ -47,7 +47,7 @@ export default async function GadgetDetailPage({ params }: GadgetDetailPageProps
       "@type": "Offer",
       priceCurrency: "KES",
       price: gadget.price,
-      availability: "https://schema.org/InStock"
+      availability: (gadget.stock ?? 1) > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
     }
   };
 
@@ -83,7 +83,7 @@ export default async function GadgetDetailPage({ params }: GadgetDetailPageProps
 
       <section className="container-shell pb-10">
         <h2 className="text-2xl font-bold tracking-tight text-white">Similar Gadgets</h2>
-        <div className="catalog-grid-compact mt-4">
+        <div className="similar-products-grid mt-4">
           {similarGadgets.map((similarGadget) => (
             <GadgetCard key={similarGadget.id} gadget={similarGadget} compact />
           ))}

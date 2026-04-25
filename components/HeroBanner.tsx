@@ -1,4 +1,5 @@
 ﻿import Link from "next/link";
+import { Home, MapPin, ChevronRight } from "lucide-react";
 import TextWithEVHighlight from "@/components/TextWithEVHighlight";
 
 type Breadcrumb = {
@@ -24,13 +25,18 @@ export default function HeroBanner({ title, subtitle, breadcrumbs }: HeroBannerP
             {breadcrumbs.map((breadcrumb, index) => (
               <li key={breadcrumb.label} className="flex items-center gap-2">
                 {breadcrumb.href ? (
-                  <Link href={breadcrumb.href} className="transition hover:text-[#00BFFF]">
+                  <Link href={breadcrumb.href} className="inline-flex items-center gap-1.5 transition hover:text-[#00BFFF]">
+                    {index === 0 && <Home className="h-3 w-3" />}
+                    {index === 1 && breadcrumb.label.toLowerCase().includes("pickup") && <MapPin className="h-3 w-3" />}
                     {breadcrumb.label}
                   </Link>
                 ) : (
-                  <span className="text-gray-300">{breadcrumb.label}</span>
+                  <span className="inline-flex items-center gap-1.5 text-gray-300">
+                    {breadcrumb.label.toLowerCase().includes("pickup") && <MapPin className="h-3 w-3" />}
+                    {breadcrumb.label}
+                  </span>
                 )}
-                {index !== breadcrumbs.length - 1 ? <span className="text-gray-600">/</span> : null}
+                {index !== breadcrumbs.length - 1 ? <ChevronRight className="h-3 w-3 text-gray-600" /> : null}
               </li>
             ))}
           </ol>

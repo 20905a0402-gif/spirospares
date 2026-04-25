@@ -360,7 +360,7 @@ export const allPagesQuery = groq`
 // ============ FEATURED PRODUCTS QUERY ============
 export const homepageFeaturedProductsQuery = groq`
   {
-    "spares": *[_type == "sparePart" && isActive == true][0...14] {
+    "spares": *[_type == "sparePart" && isActive == true && compatibleModels[]->name == "EKON450M2V2"][0...14] {
       _id,
       name,
       partCode,

@@ -113,6 +113,9 @@ export const desk = (S: StructureBuilder) =>
               S.listItem()
                 .title('Restock Requests')
                 .child(S.documentTypeList('restockRequest').title('Restock Requests')),
+              S.listItem()
+                .title('Contact Requests')
+                .child(S.documentTypeList('contactRequest').title('Contact Requests')),
             ])
         ),
 

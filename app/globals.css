@@ -47,6 +47,12 @@ a {
   padding-inline: 1rem;
 }
 
+@media (min-width: 640px) {
+  .container-shell {
+    padding-inline: 1.5rem;
+  }
+}
+
 @media (min-width: 768px) {
   .container-shell {
     padding-inline: 2.5rem;
@@ -156,10 +162,70 @@ h6 {
   gap: 1rem;
 }
 
+@media (max-width: 640px) {
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+}
+
 .catalog-grid-compact {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
   gap: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .catalog-grid-compact {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .catalog-grid-compact {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+.catalog-grid-uniform {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(165px, 210px));
+  gap: 0.75rem;
+  justify-content: start;
+}
+
+@media (max-width: 640px) {
+  .catalog-grid-uniform {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.similar-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 210px));
+  gap: 0.75rem;
+  justify-content: start;
+}
+
+@media (max-width: 640px) {
+  .similar-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .similar-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
 }
 
 .wishlist-grid {
@@ -167,6 +233,19 @@ h6 {
   gap: 0.75rem;
   grid-template-columns: repeat(auto-fill, minmax(180px, 210px));
   justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .wishlist-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .wishlist-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
 }
 
 @keyframes shimmer-text {
@@ -201,6 +280,53 @@ h6 {
   }
 }
 
+@keyframes hero-slide-fade {
+  0%,
+  20% {
+    opacity: 1;
+  }
+  25%,
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-slide-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes brand-pill-pulse {
+  0%,
+  100% {
+    box-shadow: 0 8px 20px rgba(14, 165, 233, 0.28), inset 0 0 0 rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 12px 30px rgba(14, 165, 233, 0.42), inset 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+}
+
+@keyframes mouse-wheel-move {
+  0% {
+    opacity: 0;
+    transform: translateY(1px);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+}
+
 .doorstep-shimmer {
   background-image: linear-gradient(100deg, #01091a 36%);
   background-size: 210% 100%;
@@ -211,6 +337,44 @@ h6 {
   text-shadow: 0 0 0.75px rgba(0, 0, 0, 0.2);
   backface-visibility: visible;
   
+}
+
+.delivery-tagline-pill {
+  box-shadow: 0 8px 20px rgba(2, 132, 199, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.hero-slide-layer {
+  opacity: 0;
+  will-change: opacity;
+  animation: hero-slide-fade 24s linear infinite;
+}
+
+.hero-slide-image {
+  animation: hero-slide-zoom 24s linear infinite;
+}
+
+.hero-brand-pill {
+  border-color: rgba(255, 255, 255, 0.82);
+  background: linear-gradient(120deg, rgba(2, 6, 23, 0.74), rgba(14, 116, 144, 0.72));
+  animation: brand-pill-pulse 3.2s ease-in-out infinite;
+}
+
+.hero-scroll-mouse {
+  display: inline-flex;
+  height: 26px;
+  width: 15px;
+  justify-content: center;
+  border: 1.5px solid rgba(15, 23, 42, 0.72);
+  border-radius: 9999px;
+  padding-top: 4px;
+}
+
+.hero-scroll-wheel {
+  height: 6px;
+  width: 2.5px;
+  border-radius: 9999px;
+  background: #0f172a;
+  animation: mouse-wheel-move 1.6s ease-in-out infinite;
 }
 
 .delivery-word-enter {
@@ -245,6 +409,21 @@ h6 {
 
 .animate-subtle-bounce {
   animation: subtle-bounce 1.25s ease-in-out infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.animate-confetti-fall {
+  animation: confetti-fall linear forwards;
 }
 
 @media (max-width: 1023px) {

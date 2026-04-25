@@ -1,6 +1,6 @@
-import { bikes, gadgets, serviceLocations, spareParts } from "@/lib/data";
+import { bikes, gadgets, spareParts } from "@/lib/data";
 
-export type SearchItemType = "bike" | "spare" | "gadget" | "service" | "subcategory" | "page";
+export type SearchItemType = "bike" | "spare" | "gadget" | "subcategory" | "page";
 
 export type SearchResult = {
   id: string;
@@ -21,14 +21,6 @@ const staticPages: SearchResult[] = [
     subtitle: "Main storefront",
     href: "/",
     searchable: "home main storefront"
-  },
-  {
-    id: "page-tracking",
-    type: "page",
-    title: "Tracking",
-    subtitle: "Track dispatch and delivery status",
-    href: "/tracking",
-    searchable: "tracking order shipment dispatch delivery"
   }
 ];
 
@@ -83,20 +75,10 @@ const gadgetItems: SearchResult[] = gadgets.map((gadget) => ({
   searchable: `${gadget.name} ${gadget.category} ${gadget.compatibility} ${gadget.features.join(" ")}`.toLowerCase()
 }));
 
-const serviceItems: SearchResult[] = serviceLocations.map((location) => ({
-  id: `service-${location.id}`,
-  type: "service",
-  title: location.name,
-  subtitle: `${location.area}, ${location.city}`,
-  href: `/services/${location.id}`,
-  searchable: `${location.name} ${location.city} ${location.area} ${location.services.join(" ")} service center battery swapping`.toLowerCase()
-}));
-
 export const SEARCH_INDEX: SearchResult[] = [
   ...bikeItems,
   ...spareItems,
   ...gadgetItems,
-  ...serviceItems,
   ...spareSubcategories,
   ...gadgetSubcategories,
   ...staticPages

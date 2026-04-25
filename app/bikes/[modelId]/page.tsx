@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import BikeCard from "@/components/cards/BikeCard";
 import BikeProductDetail from "@/components/pdp/BikeProductDetail";
 import { formatKES } from "@/lib/data";
-import { getLegacyBikeById, getLegacyBikes, getLegacyGadgets, getLegacySpareParts } from "@/lib/sanity/queries-data";
+import { getLegacyBikeById, getLegacyBikes, getLegacyGadgets } from "@/lib/sanity/queries-data";
 
 type BikeDetailPageProps = {
   params: {
@@ -41,14 +41,12 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
     notFound();
   }
 
-  const [allSpareParts, allGadgets, allBikes] = await Promise.all([
-    getLegacySpareParts(),
+  const [allGadgets, allBikes] = await Promise.all([
     getLegacyGadgets(),
     getLegacyBikes(),
   ]);
 
-  const compatibleSpares = allSpareParts.filter((part) => part.compatible_models.includes(bike.name));
-  const relatedGadgets = allGadgets.slice(0, 3);
+  const relatedGadgets = allGadgets.slice(0, 6);
   const similarBikes = allBikes.filter((candidate) => candidate.id !== bike.id).slice(0, 6);
 
   const productSchema = {
@@ -62,7 +60,7 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
       "@type": "Offer",
       priceCurrency: "KES",
       price: bike.price,
-      availability: "https://schema.org/InStock"
+      availability: bike.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
     }
   };
 
@@ -90,11 +88,11 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
         </nav>
       </section>
 
-      <BikeProductDetail bike={bike} compatibleSpares={compatibleSpares} relatedGadgets={relatedGadgets} />
+      <BikeProductDetail bike={bike} relatedGadgets={relatedGadgets} />
 
       <section className="container-shell pb-10">
         <h2 className="text-2xl font-bold tracking-tight text-white">Similar Bikes</h2>
-        <div className="catalog-grid-compact mt-4">
+        <div className="similar-products-grid mt-4">
           {similarBikes.map((similarBike) => (
             <BikeCard key={similarBike.id} bike={similarBike} compact />
           ))}

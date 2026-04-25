@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Metadata } from "next";
 import HeroBanner from "@/components/HeroBanner";
 import SparesCatalog from "@/components/sections/SparesCatalog";
+import { homeAndSparesModelTargets } from "@/lib/modelTargets";
 import { getLegacyBikes, getLegacySpareParts } from "@/lib/sanity/queries-data";
 
 export const metadata: Metadata = {
@@ -13,6 +14,11 @@ export const metadata: Metadata = {
 export default async function SparesPage() {
   const [bikes, spareParts] = await Promise.all([getLegacyBikes(), getLegacySpareParts()]);
 
+  const modelFilters = homeAndSparesModelTargets.map((target) => ({
+    label: target.label,
+    matchTokens: [...target.searchTokens, ...(target.fallbackTokens ?? [])]
+  }));
+
   return (
     <>
       <HeroBanner
@@ -22,7 +28,7 @@ export default async function SparesPage() {
       />
 
       <Suspense fallback={<section className="container-shell py-10"><div className="panel p-6 text-center text-gray-400">Loading spare catalog...</div></section>}>
-        <SparesCatalog parts={spareParts} modelNames={bikes.map((bike) => bike.name)} />
+        <SparesCatalog parts={spareParts} modelNames={bikes.map((bike) => bike.name)} modelFilters={modelFilters} />
       </Suspense>
     </>
   );
