@@ -385,6 +385,21 @@ h6 {
   animation: swipe-hint 1.2s ease-in-out infinite;
 }
 
+/* Swipe arrow animation - moves right and back */
+@keyframes swipe-arrow-move {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+}
+
+.animate-swipe-arrow {
+  animation: swipe-arrow-move 0.8s ease-in-out infinite;
+  display: inline-block;
+}
+
 @keyframes nudge-right {
   0%,
   100% {

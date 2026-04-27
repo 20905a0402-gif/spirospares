@@ -407,7 +407,7 @@ export default function CheckoutPanel() {
   };
 
   return (
-    <div className="mx-auto max-w-5xl">
+    <div className="mx-auto w-full max-w-5xl">
       <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
         {/* Left Column - Order Details */}
         <div className="space-y-4">

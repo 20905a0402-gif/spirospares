@@ -183,11 +183,9 @@ export default function Header() {
     </header>
   );
 
-  // Mobile Header with integrated NavStrip
-  // Mobile Header with Swipe Detection
+  // Mobile Header with Swipe Detection - navstrip always visible, indicator hides after swipe
   const MobileHeaderWithSwipe = () => {
     const [hasSwiped, setHasSwiped] = useState(false)
-    const [showNavStrip, setShowNavStrip] = useState(true)
     const [mounted, setMounted] = useState(false)
     const navRef = useRef<HTMLUListElement>(null)
 
@@ -197,7 +195,6 @@ export default function Header() {
       const stored = sessionStorage.getItem('spiro_nav_swiped_session')
       if (stored === 'true') {
         setHasSwiped(true)
-        setShowNavStrip(false) // Hide nav strip after swipe in this session
       }
     }, [])
 
@@ -209,8 +206,6 @@ export default function Header() {
         if (nav.scrollLeft > 20) {
           setHasSwiped(true)
           sessionStorage.setItem('spiro_nav_swiped_session', 'true')
-          // Delay hiding the strip so user sees the animation
-          setTimeout(() => setShowNavStrip(false), 500)
         }
       }
 
@@ -250,43 +245,39 @@ export default function Header() {
           )}
         </div>
 
-        {/* Row 2: Cyan Nav Strip - hidden after swipe for this session */}
-        {showNavStrip && (
-          <nav className="bg-[#00BFFF] relative">
-            <div className="container-shell">
-              <ul 
-                ref={navRef}
-                className="flex items-center gap-1 py-2.5 text-xs font-semibold overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              >
-                {quickLinks.map((link) => (
-                  <li key={link.href} className="flex-shrink-0">
-                    <Link
-                      href={link.href}
-                      className={`relative inline-flex items-center px-3 py-1.5 rounded-full transition-all duration-300 ease-out whitespace-nowrap ${
-                        isLinkActive(link.href)
-                          ? 'bg-white text-[#0080A0] shadow-sm'
-                          : 'text-white hover:bg-white/20 hover:text-white'
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* Fade effect on right edge */}
-            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#00BFFF] to-transparent pointer-events-none lg:hidden" />
-          </nav>
-        )}
-
-        {/* Swipe indicator - shown below nav strip, once per session */}
-        {mounted && !hasSwiped && showNavStrip && (
-          <div className="bg-[#00BFFF]/10 border-b border-[#00BFFF]/20 py-1.5 text-center lg:hidden animate-pulse">
-            <span className="text-[10px] font-bold text-[#00BFFF] uppercase tracking-wider flex items-center justify-center gap-1">
-              <span>←</span> Swipe the menu above to explore <span>→</span>
-            </span>
+        {/* Row 2: Cyan Nav Strip - always visible */}
+        <nav className="bg-[#00BFFF] relative">
+          <div className="container-shell flex items-center">
+            <ul 
+              ref={navRef}
+              className="flex items-center gap-1 py-2.5 text-xs font-semibold overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden flex-1"
+            >
+              {quickLinks.map((link) => (
+                <li key={link.href} className="flex-shrink-0">
+                  <Link
+                    href={link.href}
+                    className={`relative inline-flex items-center px-3 py-1.5 rounded-full transition-all duration-300 ease-out whitespace-nowrap ${
+                      isLinkActive(link.href)
+                        ? 'bg-white text-[#0080A0] shadow-sm'
+                        : 'text-white hover:bg-white/20 hover:text-white'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            
+            {/* Swipe arrow indicator - right side, only shows before swipe */}
+            {mounted && !hasSwiped && (
+              <div className="flex-shrink-0 pl-2 ml-1">
+                <span className="text-white/90 text-lg animate-swipe-arrow">→</span>
+              </div>
+            )}
           </div>
-        )}
+          {/* Fade effect on right edge */}
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#00BFFF] to-transparent pointer-events-none lg:hidden" />
+        </nav>
       </header>
     )
   }
