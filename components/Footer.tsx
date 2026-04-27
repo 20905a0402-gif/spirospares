@@ -94,15 +94,17 @@ export default function Footer() {
           <article>
             <h3 className="text-lg font-semibold tracking-tight text-[#f8fafc]">Contact</h3>
             <ul className="mt-4 space-y-3 text-sm text-[#94a3b8]">
-              <li className="inline-flex items-center gap-2">
-                <Phone className="h-4 w-4 text-[#00BFFF]" /> +254 733 959 383
+              <li className="flex items-center gap-2">
+                <Phone className="h-4 w-4 flex-shrink-0 text-[#00BFFF]" />
+                <span>+254 733 959 383</span>
               </li>
-              <li className="inline-flex items-center gap-2">
-                <Mail className="h-4 w-4 text-[#00BFFF]" /> support@spirospares.co.ke
+              <li className="flex items-center gap-2">
+                <Mail className="h-4 w-4 flex-shrink-0 text-[#00BFFF]" />
+                <span>support@spirospares.co.ke</span>
               </li>
-              <li className="inline-flex items-start gap-2">
-                <MapPin className="mt-0.5 h-4 w-4 text-[#00BFFF]" />
-                Dunga Close, Industrial Area, Nairobi
+              <li className="flex items-start gap-2">
+                <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#00BFFF]" />
+                <span>Dunga Close, Industrial Area, Nairobi</span>
               </li>
             </ul>
           </article>

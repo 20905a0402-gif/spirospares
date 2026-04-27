@@ -360,6 +360,22 @@ export default function CheckoutPanel() {
       return;
     }
 
+    // Validate Kenyan phone number format
+    const phoneRegex = /^(0[17]\d{8}|254[17]\d{8}|\+254[17]\d{8})$/;
+    if (!phoneRegex.test(customerPhone.trim())) {
+      setErrorMessage("Please enter a valid Kenyan phone number (e.g., 0712345678 or 254712345678).");
+      return;
+    }
+
+    // Validate email if provided
+    if (customerEmail.trim()) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(customerEmail.trim())) {
+        setErrorMessage("Please enter a valid email address or leave it blank.");
+        return;
+      }
+    }
+
     if (!selectedPickupLocation) {
       setErrorMessage("Please select a pickup location.");
       return;
