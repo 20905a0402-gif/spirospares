@@ -11,7 +11,7 @@ export default function CheckoutPage() {
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Checkout" }]}
       />
 
-      <section className="container-shell py-10">
+      <section className="container-shell px-4 py-10 sm:px-0">
         <Suspense fallback={<div className="panel mx-auto max-w-3xl p-8 text-center text-gray-400">Loading checkout...</div>}>
           <CheckoutPanel />
         </Suspense>

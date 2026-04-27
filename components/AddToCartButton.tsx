@@ -87,7 +87,7 @@ export default function AddToCartButton({ item, compact = false }: AddToCartButt
       }`}
     >
       <ShoppingCart className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} />
-      <span>Add to Cart</span>
+      <span className="whitespace-nowrap">Add to Cart</span>
     </button>
   );
 }
