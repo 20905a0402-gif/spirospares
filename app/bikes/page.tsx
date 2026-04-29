@@ -1,4 +1,7 @@
-﻿import { Metadata } from "next";
+﻿// ISR: Revalidate every 60 seconds to pick up Sanity changes
+export const revalidate = 60;
+
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import HeroBanner from "@/components/HeroBanner";

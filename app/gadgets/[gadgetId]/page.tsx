@@ -1,3 +1,6 @@
+// ISR: Revalidate every 60 seconds to pick up Sanity changes
+export const revalidate = 60;
+
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";

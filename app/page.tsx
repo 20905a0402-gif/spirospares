@@ -1,4 +1,7 @@
-﻿import Link from "next/link";
+﻿// ISR: Revalidate every 60 seconds to pick up Sanity changes
+export const revalidate = 60;
+
+import Link from "next/link";
 import Image from "next/image";
 import { Clock3, MapPin } from "lucide-react";
 import BikeCard from "@/components/cards/BikeCard";

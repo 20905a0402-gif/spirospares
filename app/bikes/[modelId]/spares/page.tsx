@@ -1,3 +1,6 @@
+// ISR: Revalidate every 60 seconds to pick up Sanity changes
+export const revalidate = 60;
+
 import { notFound } from "next/navigation";
 import ModelSparesCatalog from "@/components/sections/ModelSparesCatalog";
 import { getLegacyBikeById, getLegacyBikes, getLegacySpareParts } from "@/lib/sanity/queries-data";

@@ -1,3 +1,6 @@
+// ISR: Revalidate every 60 seconds to pick up Sanity changes
+export const revalidate = 60;
+
 import { Suspense } from "react";
 import { Metadata } from "next";
 import HeroBanner from "@/components/HeroBanner";
